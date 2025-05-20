@@ -5,7 +5,26 @@
 <p>No products found!</p>
 }
 <ul class="pill-group">
-@for (product of products; track product.id) {
-<li class="pill">{{product.title}}</li>
-}
+@for (product of products; track product.id; let i = $index) {
+<li class="pill" (click)="selectedProduct = product">
+  {{i+1}}.{{product.title}}
+  @switch (product.title) {
+    @case ('Keyboard') { ⌨️ }
+    @case ('Microphone') { 🎙️ }
+    @default { 🏷️ }
+  }
+</li>
+}@empty {
+  <p>No products found!</p>
+  }
 </ul>
+@if (selectedProduct) {
+  <p>You selected:
+  <strong>{{selectedProduct.title}}</strong>
+  </p>
+  }
+  <br>
+  <app-product-detail
+  [product]="selectedProduct"
+  (added)="onAdded($event)"
+></app-product-detail>
