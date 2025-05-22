@@ -15,10 +15,14 @@ export class ProductListComponent {
     { id: 3, title: 'Web camera' },
     { id: 4, title: 'Tablet' },
   ];
-  selectedProduct: Product | undefined;
+  selectedProduct: Product | undefined = this.products[0];
 
   onAdded(product: Product) {
     alert(`${product.title} added to the cart!`);
+  }
+
+  myFunction() {
+    document.getElementById('demo').innerText = 'Edwin Firacative';
   }
 }
 

@@ -19,12 +19,28 @@
   }
 </ul>
 @if (selectedProduct) {
+
   <p>You selected:
   <strong>{{selectedProduct.title}}</strong>
   </p>
-  }
+
   <br>
   <app-product-detail
+  #productDetail
   [product]="selectedProduct"
   (added)="onAdded($event)"
 ></app-product-detail>
+
+ <span>{{productDetail.product()!.title!}}</span>
+
+  }
+  <br>
+  <h2>My First JavaScript</h2>
+
+<button id= "b1" type="button" (click)="myFunction()"
+>
+Click me to display Date and Time.</button>
+
+<p id="demo">Hola</p>
+
+

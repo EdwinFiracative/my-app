@@ -1,7 +1,9 @@
 @if (product()) {
+  <div>
   <p>You selected:
-  <strong>{{product()!.title}}</strong>
+  <strong>{{productTitle}}</strong>
   </p>
 <br>
   <button (click)="addToCart()">Add to cart</button>
+</div>
   }
