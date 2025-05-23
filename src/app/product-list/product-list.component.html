@@ -7,12 +7,13 @@
 <ul class="pill-group">
 @for (product of products | sort; track product.id; let i = $index) {
 <li class="pill" (click)="selectedProduct = product">
-  {{i+1}}.{{product.title}}
+  <app-product-view [id]="product.id"></app-product-view>
+  <!-- {{i+1}}.{{product.title}}
   @switch (product.title) {
     @case ('Keyboard') { ⌨️ }
     @case ('Microphone') { 🎙️ }
     @default { 🏷️ }
-  }
+  } -->
 </li>
 }@empty {
   <p>No products found!</p>
@@ -42,6 +43,9 @@
 Click me to display Date and Time.</button>
 
 <p id="demo">Hola {{messaje}}</p>
+<br>
+<h1>Favorites</h1>
+<app-favorites></app-favorites>
 
 
 
