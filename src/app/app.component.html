@@ -8,14 +8,15 @@
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
 
-
+<header>{{ title }}</header>
 <main class="main">
   <div class="content">
     <app-product-list></app-product-list>
   </div>
- 
+
 </main>
  <input  appNumeric />
+ <app-key-logger [numeric]="true"></app-key-logger>
 <footer appCopyright></footer>
 <router-outlet />
 
