@@ -7,6 +7,7 @@ import { FavoritesComponent } from '../favorites/favorites.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
+import { ProductCreateComponent } from '../product-create/product-create.component';
 
 @Component({
   selector: 'app-product-list',
@@ -16,6 +17,7 @@ import { Observable } from 'rxjs';
     FavoritesComponent,
     ProductViewComponent,
     AsyncPipe,
+    ProductCreateComponent,
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
@@ -35,10 +37,10 @@ export class ProductListComponent implements OnInit {
     this.getProducts();
   }
 
-  selectedProduct: Product | undefined ;
+  selectedProduct: Product | undefined;
   messaje: string = 'Hola';
-  onAdded(product: Product) {
-    alert(`${product.title} added to the cart!`);
+  onAdded() {
+    alert(`${this.selectedProduct?.title} added to the cart!`);
   }
 
   myFunction() {

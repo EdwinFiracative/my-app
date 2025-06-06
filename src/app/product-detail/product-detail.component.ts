@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import {  Component, input, OnInit, output, ViewEncapsulation } from '@angular/core';
+import {  Component, input, OnInit, output, ViewEncapsulation, OnChanges } from '@angular/core';
 import { Product } from '../product';
+import { Observable } from 'rxjs';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -9,22 +11,42 @@ import { Product } from '../product';
   styleUrl: './product-detail.component.css',
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class ProductDetailComponent implements OnInit {
-  constructor() {
-    console.log('Product:', this.product());
+export class ProductDetailComponent implements OnInit, OnChanges {
+  constructor(private productService: ProductsService) {
+    //console.log('Product:', this.product());
   }
+
+  id = input<number>();
+  deleted = output();
+
+  product$: Observable<Product> | undefined;
 
   ngOnInit(): void {
-    console.log('Product:', this.product());
+    //console.log('Product:', this.product());
   }
-  product = input<Product>();
-  added = output<Product>();
+  //product = input<Product>();
+
+  ngOnChanges(): void {
+    this.product$ = this.productService.getProduct(this.id()!);
+  }
+
+  added = output();
 
   addToCart() {
-    this.added.emit(this.product()!);
+    this.added.emit();
   }
 
-  get productTitle() {
-    return this.product()!.title;
+  changePrice(product: Product, price: string) {
+    this.productService.updateProduct(product.id, Number(price)).subscribe();
   }
+
+  remove(product: Product) {
+    this.productService.deleteProduct(product.id).subscribe(() => {
+      this.deleted.emit();
+    });
+  }
+
+  /* get productTitle() {
+    return this.product()!.title;
+  } */
 }

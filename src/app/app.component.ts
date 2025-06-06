@@ -3,9 +3,9 @@ import { RouterOutlet } from '@angular/router';
 import { ProductListComponent } from './product-list/product-list.component';
 import { CopyrightDirective } from './copyright.directive';
 import { NumericDirective } from './numeric.directive';
-import { APP_SETTINGS, appSettings } from './app.settings';
 import { Observable } from 'rxjs';
 import { KeyLoggerComponent } from './key-logger/key-logger.component';
+import { APP_SETTINGS } from './app.settings';
 
 @Component({
   selector: 'app-root',
@@ -18,17 +18,24 @@ import { KeyLoggerComponent } from './key-logger/key-logger.component';
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  providers: [{ provide: APP_SETTINGS, useValue: appSettings }],
+
+  //providers: [{ provide: APP_SETTINGS, useValue: appSettings }],
 })
 export class AppComponent {
+  settings = inject(APP_SETTINGS);
   currentDate = signal(new Date());
   constructor() {
     // this.onComplete().then(this.setTitle);
+
     this.title$.subscribe(this.setTitle);
+
     // this.changeTitle(this.setTitle);
+    this.title = computed(() => {
+      return `${this.settings.title} (${this.currentDate()})`;
+    });
   }
 
-  title = 'my-app';
+  title: Signal<string> = signal('');
 
   title$ = new Observable((observer) => {
     setInterval(() => {
@@ -36,16 +43,16 @@ export class AppComponent {
     }, 2000);
   });
 
-  settings = inject(APP_SETTINGS);
+  //settings = inject(APP_SETTINGS);
 
   private setTitle = () => {
     // const timestamp = new Date();
 
     this.currentDate.set(new Date());
 
-   // this.title = `${this.settings.title} (${timestamp})`;
+    // this.title = `${this.settings.title} (${timestamp})`;
 
-   this.title = `${this.settings.title} (${this.currentDate()})`;
+    // this.title = `${this.settings.title} (${this.currentDate()})`;
 
     // this.title = this.settings.title;
   };
