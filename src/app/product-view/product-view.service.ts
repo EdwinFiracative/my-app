@@ -8,7 +8,7 @@ export class ProductViewService {
   constructor(private productService: ProductsService) {}
 
   getProduct(id: number): Product | undefined {
-    const products = this.productService.getProducts();
+    const products = this.productService.products  //.getProducts();
     if (!this.product) {
     this.product = products.find((product) => product.id === id);
     }
