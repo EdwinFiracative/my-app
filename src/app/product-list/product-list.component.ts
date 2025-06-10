@@ -39,6 +39,7 @@ export class ProductListComponent implements OnInit {
 
   selectedProduct: Product | undefined;
   messaje: string = 'Hola';
+
   onAdded() {
     alert(`${this.selectedProduct?.title} added to the cart!`);
   }

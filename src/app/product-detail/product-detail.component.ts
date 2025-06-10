@@ -3,6 +3,7 @@ import {  Component, input, OnInit, output, ViewEncapsulation, OnChanges } from 
 import { Product } from '../product';
 import { Observable } from 'rxjs';
 import { ProductsService } from '../products.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,7 +13,10 @@ import { ProductsService } from '../products.service';
   encapsulation: ViewEncapsulation.Emulated,
 })
 export class ProductDetailComponent implements OnInit, OnChanges {
-  constructor(private productService: ProductsService) {
+  constructor(
+    private productService: ProductsService,
+    public authService: AuthService
+  ) {
     //console.log('Product:', this.product());
   }
 

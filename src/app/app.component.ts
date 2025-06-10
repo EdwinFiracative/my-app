@@ -6,6 +6,7 @@ import { NumericDirective } from './numeric.directive';
 import { Observable } from 'rxjs';
 import { KeyLoggerComponent } from './key-logger/key-logger.component';
 import { APP_SETTINGS } from './app.settings';
+import { AuthComponent } from './auth/auth.component';
 
 @Component({
   selector: 'app-root',
@@ -15,6 +16,7 @@ import { APP_SETTINGS } from './app.settings';
     CopyrightDirective,
     NumericDirective,
     KeyLoggerComponent,
+    AuthComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
