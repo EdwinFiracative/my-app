@@ -7,7 +7,8 @@ import { FavoritesComponent } from '../favorites/favorites.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { ProductCreateComponent } from '../product-create/product-create.component';
+//import { ProductCreateComponent } from '../product-create/product-create.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -17,11 +18,12 @@ import { ProductCreateComponent } from '../product-create/product-create.compone
     FavoritesComponent,
     ProductViewComponent,
     AsyncPipe,
-    ProductCreateComponent,
+    RouterLink,
+    //ProductCreateComponent,
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.css',
-  providers: [ProductsService],
+  //providers: [ProductsService],
 })
 export class ProductListComponent implements OnInit {
   products$: Observable<Product[]> | undefined;

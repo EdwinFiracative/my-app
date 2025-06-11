@@ -13,3 +13,5 @@ select {
 label {
   margin-bottom: 4px;
   display: block; }
+    :host {
+      width: 400px;   }

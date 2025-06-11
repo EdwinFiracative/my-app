@@ -1,14 +1,19 @@
 import { Component } from '@angular/core';
 import { ProductsService } from '../products.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-create',
   imports: [],
   templateUrl: './product-create.component.html',
   styleUrl: './product-create.component.css',
+  // providers: [ProductsService],
 })
 export class ProductCreateComponent {
-  constructor(private productsService: ProductsService) {}
+  constructor(
+    private productsService: ProductsService,
+    private router: Router
+  ) {}
 
   createProduct(title: string, price: string, category: string) {
     this.productsService
@@ -17,6 +22,6 @@ export class ProductCreateComponent {
         price: Number(price),
         category,
       })
-      .subscribe();
+      .subscribe(() => this.router.navigate(['/products']));
   }
 }

@@ -1,6 +1,6 @@
 import { Component, inject, Signal, computed, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { ProductListComponent } from './product-list/product-list.component';
+import { RouterLink, RouterOutlet } from '@angular/router';
+//import { ProductListComponent } from './product-list/product-list.component';
 import { CopyrightDirective } from './copyright.directive';
 import { NumericDirective } from './numeric.directive';
 import { Observable } from 'rxjs';
@@ -12,7 +12,8 @@ import { AuthComponent } from './auth/auth.component';
   selector: 'app-root',
   imports: [
     RouterOutlet,
-    ProductListComponent,
+    RouterLink,
+    //ProductListComponent,
     CopyrightDirective,
     NumericDirective,
     KeyLoggerComponent,

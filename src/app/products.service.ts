@@ -42,6 +42,7 @@ export class ProductsService {
   ]; */
 
   getProducts(): Observable<Product[]> {
+    if (this.products.length === 0) {
     const options = new HttpParams().set('limit', 10);
     return this.http
       .get<Product[]>(this.productsUrl, {
@@ -54,7 +55,8 @@ export class ProductsService {
         })
       );
 
-    //return of(this.products);
+    }
+      return of(this.products);
   }
 
   getProduct(id: number): Observable<Product> {
