@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import {  Component, input, OnInit, output, ViewEncapsulation, OnChanges } from '@angular/core';
 import { Product } from '../product';
-import { Observable } from 'rxjs';
+import { Observable, switchMap } from 'rxjs';
 import { ProductsService } from '../products.service';
 import { AuthService } from '../auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,10 +13,13 @@ import { AuthService } from '../auth.service';
   styleUrl: './product-detail.component.css',
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class ProductDetailComponent implements OnInit, OnChanges {
+export class ProductDetailComponent implements OnInit {
+  //, OnChanges
   constructor(
     private productService: ProductsService,
-    public authService: AuthService
+    public authService: AuthService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {
     //console.log('Product:', this.product());
   }
@@ -27,26 +31,35 @@ export class ProductDetailComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     //console.log('Product:', this.product());
+    this.product$ = this.route.paramMap.pipe(
+      switchMap((params) => {
+        return this.productService.getProduct(Number(params.get('id')));
+      })
+    );
   }
   //product = input<Product>();
 
-  ngOnChanges(): void {
+  /*  ngOnChanges(): void {
     this.product$ = this.productService.getProduct(this.id()!);
-  }
+  } */
 
   added = output();
 
   addToCart() {
-    this.added.emit();
+    // this.added.emit();
   }
 
   changePrice(product: Product, price: string) {
-    this.productService.updateProduct(product.id, Number(price)).subscribe();
+    this.productService
+      .updateProduct(product.id, Number(price))
+      .subscribe(() => {
+        this.router.navigate(['/products']);
+      });
   }
 
   remove(product: Product) {
     this.productService.deleteProduct(product.id).subscribe(() => {
-      this.deleted.emit();
+      this.router.navigate(['/products']);
     });
   }
 

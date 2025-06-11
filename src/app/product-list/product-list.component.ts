@@ -8,7 +8,7 @@ import { ProductViewComponent } from '../product-view/product-view.component';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
 //import { ProductCreateComponent } from '../product-create/product-create.component';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -19,6 +19,7 @@ import { RouterLink } from '@angular/router';
     ProductViewComponent,
     AsyncPipe,
     RouterLink,
+    RouterOutlet
     //ProductCreateComponent,
   ],
   templateUrl: './product-list.component.html',

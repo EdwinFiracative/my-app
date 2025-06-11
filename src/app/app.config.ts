@@ -14,6 +14,6 @@ export const appConfig: ApplicationConfig = {
     //provideHttpClient(withInterceptors([authInterceptor])),
     provideHttpClient(),
     { provide: APP_SETTINGS, useValue: appSettings },
-    ProductsService,
+
   ],
 };

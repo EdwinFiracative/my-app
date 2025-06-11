@@ -1,5 +1,5 @@
 import { Component, inject, Signal, computed, signal } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 //import { ProductListComponent } from './product-list/product-list.component';
 import { CopyrightDirective } from './copyright.directive';
 import { NumericDirective } from './numeric.directive';
@@ -13,6 +13,7 @@ import { AuthComponent } from './auth/auth.component';
   imports: [
     RouterOutlet,
     RouterLink,
+    RouterLinkActive,
     //ProductListComponent,
     CopyrightDirective,
     NumericDirective,

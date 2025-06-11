@@ -2,9 +2,20 @@ import { Routes } from '@angular/router';
 import { CartComponent } from './cart/cart.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductCreateComponent } from './product-create/product-create.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { ProductsService } from './products.service';
 
 export const routes: Routes = [
-  { path: 'products', component: ProductListComponent },
+  {
+    path: 'products',
+    component: ProductListComponent,
+    children: [
+      { path: 'new', component: ProductCreateComponent },
+      { path: ':id', component: ProductDetailComponent },
+    ],
+    providers: [ProductsService],
+  },
   { path: 'cart', component: CartComponent },
-  { path: 'products/new', component: ProductCreateComponent },
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: '**', redirectTo: 'products' },
 ];
