@@ -4,7 +4,9 @@ import { Observable, map, of, tap } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { APP_SETTINGS } from './app.settings';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ProductsService {
   private productsUrl = inject(APP_SETTINGS).apiUrl + '/products';
   constructor(private http: HttpClient) {}
@@ -41,22 +43,21 @@ export class ProductsService {
     },
   ]; */
 
-  getProducts(): Observable<Product[]> {
+  getProducts(limit?: number): Observable<Product[]> {
     if (this.products.length === 0) {
-    const options = new HttpParams().set('limit', 10);
-    return this.http
-      .get<Product[]>(this.productsUrl, {
-        params: options,
-      })
-      .pipe(
-        map((products) => {
-          this.products = products;
-          return products;
+      const options = new HttpParams().set('limit', limit || 10);
+      return this.http
+        .get<Product[]>(this.productsUrl, {
+          params: options,
         })
-      );
-
+        .pipe(
+          map((products) => {
+            this.products = products;
+            return products;
+          })
+        );
     }
-      return of(this.products);
+    return of(this.products);
   }
 
   getProduct(id: number): Observable<Product> {

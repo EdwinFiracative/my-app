@@ -6,20 +6,20 @@ import { ProductsService } from '../products.service';
 import { FavoritesComponent } from '../favorites/favorites.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
 import { AsyncPipe } from '@angular/common';
-import { Observable } from 'rxjs';
+import { Observable, of, switchMap } from 'rxjs';
 //import { ProductCreateComponent } from '../product-create/product-create.component';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
   imports: [
-    ProductDetailComponent,
+   // ProductDetailComponent,
     SortPipe,
     FavoritesComponent,
-    ProductViewComponent,
+   // ProductViewComponent,
     AsyncPipe,
     RouterLink,
-    RouterOutlet
+    RouterOutlet,
     //ProductCreateComponent,
   ],
   templateUrl: './product-list.component.html',
@@ -32,8 +32,12 @@ export class ProductListComponent implements OnInit {
   // constructor(private readonly productService: ProductsService) {}
   private productService = inject(ProductsService);
 
+  constructor(private route: ActivatedRoute) {}
+
   private getProducts() {
-    this.products$ = this.productService.getProducts();
+    this.products$ = this.route.data.pipe(
+      switchMap(data => of(data['products'])));
+
   }
 
   ngOnInit(): void {
