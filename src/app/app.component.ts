@@ -1,4 +1,4 @@
-import { Component, inject, Signal, computed, signal } from '@angular/core';
+import { AfterViewInit, Component, inject, Signal, computed, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 //import { ProductListComponent } from './product-list/product-list.component';
 import { CopyrightDirective } from './copyright.directive';
@@ -18,16 +18,21 @@ import { AuthComponent } from './auth/auth.component';
     CopyrightDirective,
     NumericDirective,
     KeyLoggerComponent,
-    AuthComponent
+    AuthComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 
   //providers: [{ provide: APP_SETTINGS, useValue: appSettings }],
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
+  title2 = '';
   settings = inject(APP_SETTINGS);
   currentDate = signal(new Date());
+
+  ngAfterViewInit(): void {
+    this.title2 = this.settings.title;
+  }
   constructor() {
     // this.onComplete().then(this.setTitle);
 

@@ -13,11 +13,13 @@
   position: relative;
 }
 
-input.valid {
+input.valid,
+input.ng-dirty.ng-valid {
   border: solid green;
 }
 
-input.invalid {
+input.invalid,
+input.ng-dirty.ng-invalid {
   border: solid red;
 }
 
@@ -61,3 +63,6 @@ input {
                             label {
                               margin-bottom: 4px;
                               display: block;               }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
