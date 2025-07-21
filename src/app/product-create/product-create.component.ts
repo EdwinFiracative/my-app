@@ -1,11 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import {MatInput} from '@angular/material/input';
+import { MatFormField, MatError,MatLabel } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { priceMaximumValidator } from '../price-maximum.validator';
+import {MatSelect, MatOption} from '@angular/material/select';
 
 @Component({
   selector: 'app-product-create',
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule,
+    MatButton,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatError,
+    MatSelect,
+    MatOption,
+  ],
   templateUrl: './product-create.component.html',
   styleUrl: './product-create.component.css',
   // providers: [ProductsService],
@@ -32,7 +46,11 @@ export class ProductCreateComponent implements OnInit {
   private buildForm() {
     this.productForm = this.builder.nonNullable.group({
       title: [''],
-      price: this.builder.nonNullable.control<number | undefined>(undefined),
+      price: this.builder.nonNullable.control<number | undefined>(undefined, [
+        Validators.required,
+        Validators.min(1),
+        priceMaximumValidator(1000),
+      ]),
       category: [''],
     });
   }

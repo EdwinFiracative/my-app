@@ -7,10 +7,35 @@ import { AuthService } from '../auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../cart.service';
+import { PriceMaximumDirective } from '../price-maximum.directive';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatInput } from '@angular/material/input';
+import {
+  MatFormField,
+  MatError,
+  MatSuffix,
+} from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import {MatChipSet, MatChip} from '@angular/material/chips';
+import { MatSnackBarModule, MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule, FormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    PriceMaximumDirective,
+    MatButton,
+    MatInput,
+    MatFormField,
+    MatError,
+    MatIcon,
+    MatSuffix,
+    MatIconButton,
+    MatChipSet,
+    MatChip,
+    MatSnackBarModule,
+  ],
   templateUrl: './product-detail.component.html',
   styleUrl: './product-detail.component.css',
   encapsulation: ViewEncapsulation.Emulated,
@@ -22,7 +47,8 @@ export class ProductDetailComponent implements OnInit {
     public authService: AuthService,
     private route: ActivatedRoute,
     private router: Router,
-    private cartService: CartService
+    private cartService: CartService,
+    private snackbar: MatSnackBar
   ) {
     //console.log('Product:', this.product());
   }
@@ -49,7 +75,11 @@ export class ProductDetailComponent implements OnInit {
   added = output();
 
   addToCart(id: number) {
-    this.cartService.addProduct(id).subscribe();
+    this.cartService.addProduct(id).subscribe(() => {
+      this.snackbar.open('Product added to cart!', undefined, {
+        duration: 1000,
+      });
+    });
   }
 
   changePrice(product: Product) {

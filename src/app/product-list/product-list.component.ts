@@ -5,10 +5,15 @@ import { SortPipe } from '../sort.pipe';
 import { ProductsService } from '../products.service';
 import { FavoritesComponent } from '../favorites/favorites.component';
 import { ProductViewComponent } from '../product-view/product-view.component';
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, CurrencyPipe } from '@angular/common';
 import { Observable, of, switchMap } from 'rxjs';
 //import { ProductCreateComponent } from '../product-create/product-create.component';
 import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
+import { MatMiniFabButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {MatButtonToggle, MatButtonToggleGroup} from '@angular/material/button-toggle';
 
 @Component({
   selector: 'app-product-list',
@@ -18,8 +23,15 @@ import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
     FavoritesComponent,
    // ProductViewComponent,
     AsyncPipe,
+    CurrencyPipe,
     RouterLink,
     RouterOutlet,
+    MatMiniFabButton,
+    MatIcon,
+    MatCardModule,
+    MatTableModule,
+    MatButtonToggle,
+    MatButtonToggleGroup,
     //ProductCreateComponent,
   ],
   templateUrl: './product-list.component.html',
@@ -28,7 +40,7 @@ import { RouterLink, RouterOutlet, ActivatedRoute } from '@angular/router';
 })
 export class ProductListComponent implements OnInit {
   products$: Observable<Product[]> | undefined;
-
+  columnNames = ['title', 'price'];
   // constructor(private readonly productService: ProductsService) {}
   private productService = inject(ProductsService);
 

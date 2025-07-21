@@ -9,14 +9,16 @@
 
 
 <header>
-  <h2>{{ settings.title}}</h2>
-  <!--<h2>{{ title2 }}</h2>-->
-  <div class="menu-links">
-    <a routerLink="/products" routerLinkActive="active">Products</a>
-    <a routerLink="/cart" routerLinkActive="active">My Cart</a>
-    <a routerLink="/user" routerLinkActive="active">My Profile</a>
-    </div>
-    <app-auth></app-auth>
+  <mat-toolbar>
+    <mat-toolbar-row>
+      <h2>{{ settings.title }}</h2>
+      <span class="spacer"></span>
+      <button mat-button routerLink="/products">Products</button>
+      <button mat-button routerLink="/cart" [matBadge]="cartService.cart?.products?.length">My Cart</button>
+      <button mat-button routerLink="/user">My Profile</button>
+      <app-auth></app-auth>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </header>
 
 <!-- <header>{{ title() }}</header> -->
@@ -28,7 +30,13 @@
 </main>
  <input  appNumeric />
  <app-key-logger [numeric]="true"></app-key-logger>
-<footer appCopyright></footer>
+<footer>
+<mat-toolbar>
+<mat-toolbar-row>
+<span appCopyright> - v{{ settings.version }}</span>
+</mat-toolbar-row>
+</mat-toolbar>
+</footer>
 
 
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
@@ -39,5 +47,3 @@
 <!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
 
-
-<router-outlet />

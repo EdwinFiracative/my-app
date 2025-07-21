@@ -174,3 +174,7 @@ header {
 
 .menu-links a.active {
   color: var(--electric-violet); }
+
+    button {
+      margin: 5px;
+    }

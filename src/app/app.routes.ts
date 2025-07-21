@@ -6,6 +6,7 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductsService } from './products.service';
 import { authGuard } from './auth.guard';
 import { productsResolver } from './products.resolver';
+import { checkoutGuard } from './checkout.guard';
 
 export const routes: Routes = [
   {
@@ -14,13 +15,15 @@ export const routes: Routes = [
     resolve: {
       products: productsResolver,
     },
-    children: [
-      { path: 'new', component: ProductCreateComponent },
-      { path: ':id', component: ProductDetailComponent },
-    ],
-    providers: [ProductsService],
   },
-  { path: 'cart', component: CartComponent, canActivate: [authGuard] },
+  { path: 'products/new', component: ProductCreateComponent },
+  { path: 'products/:id', component: ProductDetailComponent },
+  {
+    path: 'cart',
+    component: CartComponent,
+    canActivate: [authGuard],
+    canDeactivate: [checkoutGuard],
+  },
 
   {
     path: 'user',

@@ -56,8 +56,15 @@ div {
 
 button.secondary {
   display: inline;
-  margin-left: 5px;
-  --button-accent: var(--vivid-pink); }
+  margin-left: 5px;}
 
     :host {
       width: 450px;   }
+
+            button.delete {
+              display: inline;
+              margin-left: 5px;
+              color: brown;       }
+mat-chip-set {
+  margin-bottom: 1.375rem;
+}
